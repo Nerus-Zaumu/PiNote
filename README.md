@@ -1,0 +1,2 @@
+# PiNote
+Note taking application
