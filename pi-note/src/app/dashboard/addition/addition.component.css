@@ -10,6 +10,19 @@
     flex-direction: column;
 
 }
+mat-form-field{
+    border-radius: 5px;
+    box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.4);
+}
+
+textarea{
+    height: 100px;
+    resize: none;
+}
+
+::ng-deep .mat-form-field-underline {
+    display: none;
+}
 @media(max-width: 1000px){
     .add-form{
         width: 95vw;

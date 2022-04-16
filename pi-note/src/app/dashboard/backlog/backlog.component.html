@@ -1,1 +1,34 @@
-<p>backlog works!</p>
+<div class="header">
+    <h1>Notes History</h1>
+</div>
+<mat-table [dataSource]="dataSource">
+    <ng-container matColumnDef="serialNum">
+            <th mat-header-cell *matHeaderCellDef>SN</th>
+            <td mat-cell *matCellDef="let note"> {{note.serialNum}} </td>
+    </ng-container>
+    <ng-container matColumnDef="title">
+        <th mat-header-cell *matHeaderCellDef>Title</th>
+        <td mat-cell *matCellDef="let note"> {{note.title}}</td>
+    </ng-container>
+    <ng-container matColumnDef="content">
+        <th mat-header-cell *matHeaderCellDef>Content</th>
+        <td mat-cell *matCellDef="let note"> {{note.content}} </td>
+    </ng-container>
+    <ng-container matColumnDef="edit">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let note"> 
+            <button mat-raised-button color="primary">Edit</button>
+        </td>
+    </ng-container>
+    <ng-container matColumnDef="delete">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let note">
+            <button mat-raised-button color="warn">Delete</button>
+        </td>
+    </ng-container>
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+    </mat-table>
+    <mat-paginator #paginator [pageSizeOptions]="pageOptions"
+    showFirstLastButtons>
+    </mat-paginator>

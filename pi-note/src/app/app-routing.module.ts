@@ -11,9 +11,9 @@ const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'signup', component: SignupComponent},
   {path: 'dashboard', component: DashboardComponent, children: [
-    {path: 'dashboard/home', component: HomeComponent},
-    {path: 'dashboard/backlog', component: BacklogComponent},
-    {path: 'dashboard/addition', component: AdditionComponent}
+    {path: 'home', component: HomeComponent},
+    {path: 'backlog', component: BacklogComponent},
+    {path: 'addition', component: AdditionComponent}
   ]}
 ];
 
