@@ -1,0 +1,100 @@
+.dashboard{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.dashboard > .toolbar{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 75px;
+    background-color: #6937F5;
+}
+.toolbar > .brand{
+    width: 15%;
+    margin: auto;
+    text-align: center;
+    color: white;
+}
+.toolbar >.toolbar-content{
+    margin-top: 2px;
+    background-color: #6937F5;
+}
+.toolbar-content > mat-toolbar{
+    width: 70%;
+    text-align: center;
+    margin: auto;
+    background-color: #6937F5;
+    justify-content: center;
+}
+
+mat-toolbar > ul{
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+    
+}
+ul>li{
+    list-style-type: none;
+    margin-left: 30px;
+    color: white;
+    font-family: 'Courier New', Courier, monospace;
+}
+ul>li>a{
+    text-decoration: none;
+    color: white;
+    font-family: 'Courier New', Courier, monospace;
+}
+.dropdowns{
+    width: 15%;
+    text-align: center;
+    color: white;
+    margin: auto;
+    display: flex;
+    flex-direction: row;
+}
+
+@media(max-width: 567px){
+    mat-toolbar{
+        display: none;
+    }
+}
+
+@media(min-width: 567px){
+    .dropdowns > .toolbar-dropdown > button{
+        display: none;
+    }
+}
+
+.dropdown-one{
+    background-color: white;
+    width: fit-content;
+    height: 80px;
+    border-radius: 10px;
+    box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.4);
+    display: absolute;
+    pointer-events: none;
+    display: none;
+}
+
+.dropdown-one > ul{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.dropdown-one > ul >li{
+    list-style-type: none;
+    text-align: center;
+}
+.dropdown-one > ul > li > a{
+    text-decoration: none;
+    color: #6937F5;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+}
+
+.dropdowns > .toolbar-dropdown > button:focus + .dropdown-one{
+    display: block;
+    pointer-events: auto;
+}

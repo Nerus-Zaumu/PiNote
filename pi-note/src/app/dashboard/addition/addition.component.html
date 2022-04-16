@@ -1,0 +1,26 @@
+<div class="add-form">
+    <div class="title">
+        <div class="brand">
+            <h1>Add New Note</h1>
+        </div>
+    </div>
+    <form [formGroup]="notesService.postForm">
+        <br>
+        <mat-form-field>
+            <input matInput
+            type="text"
+            placeholder="title..."
+            formControlName="title">
+        </mat-form-field>
+        <br>
+        <mat-form-field>
+            <textarea
+            matInput
+            type="text"
+            formControlName="content"></textarea>
+        </mat-form-field>
+        <br>
+        <button mat-raised-button color="primary" routerLink="/dashboard">Add</button>
+        <br>
+    </form>
+</div>

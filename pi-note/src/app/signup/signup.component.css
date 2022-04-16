@@ -1,0 +1,48 @@
+.signup-form{
+    width: 40vw;
+    height: 80vh;
+    background-color: white;
+    box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.4);
+    border-radius: 5px;
+    border-width: none;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+
+}
+@media(max-width: 1000px){
+    .signup-form{
+        width: 95vw;
+        height: 90vh;
+    }
+}
+form{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+form > mat-form-field{
+    width: 80%;
+    margin: auto;
+}
+input{
+    border-color: blueviolet;
+}
+.title{
+    width: 70%;
+    margin-top: 8vh;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    color: #6937F5;
+    font-weight: bold;
+    font-family: 'Courier New', Courier, monospace;
+}
+form > button{
+    width: fit-content;
+    margin: auto;
+}
+#instead{
+    color: #180847;
+}

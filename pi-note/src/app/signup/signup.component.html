@@ -1,0 +1,36 @@
+<div class="signup-form">
+    <div class="title">
+        <div class="brand">
+            <h1>PiNote</h1>
+        </div>
+        <div class="other">
+            <h2>Signup Here</h2>
+        </div>
+    </div>
+    <form [formGroup]="notesService.signupForm">
+        <mat-form-field>
+            <input matInput
+            type="text"
+            placeholder="Full Name"
+            formControlName="fullName">
+        </mat-form-field>
+        <br>
+        <mat-form-field>
+            <input matInput
+            type="email"
+            placeholder="email"
+            formControlName="email">
+        </mat-form-field>
+        <br>
+        <mat-form-field>
+            <input
+            matInput
+            type="password"
+            formControlName="password">
+        </mat-form-field>
+        <br>
+        <button mat-raised-button color="primary" routerLink="/login">Signup</button>
+        <br>
+        <button id="instead" mat-button routerLink="/login">Login Instead?</button>
+    </form>
+</div>
