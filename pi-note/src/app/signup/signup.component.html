@@ -10,11 +10,14 @@
         </div>
     </div>
     <form [formGroup]="notesService.signupForm">
+        <input formControlName="$key" type="hidden">
         <mat-form-field>
             <input matInput
             type="text"
             placeholder="Full Name"
             formControlName="fullName">
+            <mat-error *ngIf="notesService.signupForm.get('fullName')?.invalid">Name is invalid name</mat-error>
+            <mat-error *ngIf="notesService.signupForm.get('fullName')?.dirty || notesService.signupForm.get('fullName')?.touched">This field cannot be empty</mat-error>
         </mat-form-field>
         <br>
         <mat-form-field>
@@ -22,6 +25,8 @@
             type="email"
             placeholder="email"
             formControlName="email">
+            <mat-error *ngIf="notesService.signupForm.get('email')?.invalid">Email is not a valid mail</mat-error>
+            <mat-error *ngIf="notesService.signupForm.get('email')?.dirty || notesService.signupForm.get('email')?.touched">This field cannot be empty</mat-error>
         </mat-form-field>
         <br>
         <mat-form-field>
@@ -29,10 +34,15 @@
             matInput
             type="password"
             formControlName="password">
+            <mat-error **ngIf="notesService.signupForm.get('password')?.hasError('minLength') &&
+            notesService.signupForm.get('password')?.dirty">Password must contain at least 7 characters</mat-error>
+            <mat-error *ngIf="notesService.signupForm.get('password')?.dirty || notesService.signupForm.get('password')?.touched">This field cannot be empty</mat-error>
         </mat-form-field>
         <br>
-        <button mat-raised-button color="primary" routerLink="/login">Signup</button>
+        <button mat-raised-button color="primary" type="button" (click)="notesService.signup()"
+        [disabled]="!notesService.signupForm.valid">Signup</button>
         <br>
         <button id="instead" mat-button routerLink="/login">Login Instead?</button>
+        <mat-error **ngIf="notesService.signupForm?.invalid">Some or all the fields on this form are not correctly filled</mat-error>
     </form>
 </div>

@@ -1,5 +1,5 @@
 import { NotesService } from 'src/app/shared/notes.service';
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 
@@ -22,10 +22,11 @@ export class HomeComponent implements OnInit, AfterViewInit {
   testData = this.noteService.testData
 
   ngOnInit(): void {
+    this.dataSource = new MatTableDataSource(this.testData)
   }
   ngAfterViewInit(): void {
-    this.dataSource = new MatTableDataSource(this.testData)
     this.dataSource.paginator = this.paginator
   }
+
 
 }

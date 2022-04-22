@@ -11,11 +11,14 @@
     </div>
     <form [formGroup]="notesService.loginForm">
         <br>
+        <input formControlName="$key" type="hidden">
         <mat-form-field>
             <input matInput
             type="email"
             placeholder="email"
             formControlName="email">
+            <mat-error *ngIf="notesService.loginForm.get('email')?.dirty || notesService.loginForm.get('email')?.touched">This field cannot be left empty</mat-error>
+            <mat-error *ngIf="notesService.loginForm.get('email')?.invalid">Email is invalid</mat-error>
         </mat-form-field>
         <br>
         <mat-form-field>
@@ -23,10 +26,15 @@
             matInput
             type="password"
             formControlName="password">
+            <mat-error *ngIf="notesService.loginForm.get('password')?.hasError('minLength') && 
+            notesService.loginForm.get('password')?.dirty">Password must contain at least 7 characters</mat-error>
+            <mat-error *ngIf="notesService.loginForm.get('password')?.dirty || notesService.loginForm.get('password')?.touched">This field cannot be empty</mat-error>
         </mat-form-field>
         <br>
-        <button mat-raised-button color="primary" routerLink="/dashboard">Login</button>
+        <button mat-raised-button color="primary" type="button" (click)="notesService.login()"
+        [disabled]="!notesService.loginForm.valid">Login</button>
         <br>
         <button id="instead" mat-button routerLink="/signup">Signup Instead?</button>
+        <mat-error **ngIf="notesService.loginForm?.invalid">Some or all the fields on this form are not correctly filled</mat-error>
     </form>
 </div>

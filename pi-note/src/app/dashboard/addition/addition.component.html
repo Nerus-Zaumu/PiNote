@@ -5,6 +5,7 @@
         </div>
     </div>
     <form [formGroup]="notesService.postForm">
+        <input type="hidden" formControlName="$key">
         <br>
         <mat-form-field>
             <input matInput
@@ -21,7 +22,7 @@
             placeholder="start writing note..."></textarea>
         </mat-form-field>
         <br>
-        <button mat-raised-button color="primary" routerLink="/dashboard">Add</button>
+        <button mat-raised-button color="primary" type="button" (click)="notesService.addNote()">Add</button>
         <br>
     </form>
 </div>

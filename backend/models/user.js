@@ -6,12 +6,7 @@ const Schema = mongoose.Schema;
 const userSchema = new Schema({
     fullName: {
         type: String,
-        required: [true, 'Name is required'],
-        validate: {
-            validator: validator.String,
-            message: 'Please enter a valid name',
-            isAsync: false
-        }
+        required: [true, 'Name is required']
     },
     email: {
         type: String,
@@ -27,13 +22,14 @@ const userSchema = new Schema({
         required: [true, 'Password is required'],
         minlength: [8, 'Password cannot be shorter than 8 characters']
     },
-    notes: {
+    notes: [{
         type: Schema.Types.ObjectId, 
         ref: 'Notes'
-    }
+    }]
 })
 
 const noteSchema = new Schema({
+    _id: Schema.Types.ObjectId,
     title: {
         type: String,
         required: [true, 'Every note requires a title']

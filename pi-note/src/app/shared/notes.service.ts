@@ -1,10 +1,14 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class NotesService {
+
+  baseUrl: string = 'http://localhost:5000/api/v1.0';
 
   testData: {serialNum: number, title: string, content: string}[] = [
     {serialNum: 1, title: 'First content', content: 'This is the content of the first table element. Let us try it out'},
@@ -26,6 +30,7 @@ export class NotesService {
 
   signupForm: FormGroup = new FormGroup(
     {
+      $key: new FormControl(null),
       fullName: new FormControl('', [Validators.required]),
       email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', [Validators.minLength(7), Validators.required])
@@ -33,14 +38,53 @@ export class NotesService {
   )
 
   loginForm: FormGroup = new FormGroup({
+    $key: new FormControl(null),
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [Validators.required, Validators.minLength(7)])
   })
 
   postForm: FormGroup = new FormGroup({
+    $key: new FormControl(null),
     title: new FormControl(''),
     content: new FormControl('')
   })
 
-  constructor() { }
+  constructor(private http: HttpClient, private router: Router) { }
+
+  signup(){
+    this.http.post(`${this.baseUrl}/signup`, this.signupForm.value).
+    subscribe(response => {
+      console.log(`New user ${response} created`);
+      
+    })
+  }
+
+  login(){
+    this.http.post(`${this.baseUrl}/login`, this.loginForm.value).
+    subscribe(response=>{
+      console.log(`User session with id logged in`);
+    })
+  }
+
+  addNote(){
+    this.http.post(`${this.baseUrl}/note`, this.postForm.value).
+     subscribe((response) => {
+       console.log(response)
+       this.router.navigate(['/dashboard/home'])
+     })
+   }
+
+   deleteNote(){
+     this.http.delete(`${this.baseUrl}/note`).
+     subscribe(response => {
+       console.log(response);
+     })
+   }
+   getAllNotes(){
+     this.http.get(`${this.baseUrl}/note`).
+     subscribe(response => {
+       console.log(response);
+       
+     })
+   }
 }
