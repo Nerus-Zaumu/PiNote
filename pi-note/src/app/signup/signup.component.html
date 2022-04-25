@@ -32,17 +32,18 @@
         <mat-form-field>
             <input
             matInput
-            type="password"
+            [type]="hide ? 'password' : 'text'"
             formControlName="password">
-            <mat-error **ngIf="notesService.signupForm.get('password')?.hasError('minLength') &&
+            <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            <mat-error *ngIf="notesService.signupForm.get('password')?.hasError('minLength') &&
             notesService.signupForm.get('password')?.dirty">Password must contain at least 7 characters</mat-error>
             <mat-error *ngIf="notesService.signupForm.get('password')?.dirty || notesService.signupForm.get('password')?.touched">This field cannot be empty</mat-error>
         </mat-form-field>
         <br>
-        <button mat-raised-button color="primary" type="button" (click)="notesService.signup()"
+        <button mat-raised-button color="primary" type="button" (click)="signup()"
         [disabled]="!notesService.signupForm.valid">Signup</button>
         <br>
         <button id="instead" mat-button routerLink="/login">Login Instead?</button>
-        <mat-error **ngIf="notesService.signupForm?.invalid">Some or all the fields on this form are not correctly filled</mat-error>
+        <mat-error class="final-mat-error" *ngIf="notesService.signupForm?.invalid && notesService.signupForm?.touched">Some or all the fields on this form are not correctly filled</mat-error>
     </form>
 </div>

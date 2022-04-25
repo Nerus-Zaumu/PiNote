@@ -16,7 +16,8 @@ const MaterialComponents = [
   MatToolbarModule,
   MatIconModule,
   MatTableModule,
-  MatPaginatorModule
+  MatPaginatorModule,
+  MatIconModule
 ]
 
 @NgModule({

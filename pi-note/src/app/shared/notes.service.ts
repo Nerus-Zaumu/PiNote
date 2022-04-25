@@ -1,7 +1,9 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -9,6 +11,7 @@ import { Router } from '@angular/router';
 export class NotesService {
 
   baseUrl: string = 'http://localhost:5000/api/v1.0';
+  statusCode: any;
 
   testData: {serialNum: number, title: string, content: string}[] = [
     {serialNum: 1, title: 'First content', content: 'This is the content of the first table element. Let us try it out'},
@@ -51,19 +54,13 @@ export class NotesService {
 
   constructor(private http: HttpClient, private router: Router) { }
 
+
   signup(){
-    this.http.post(`${this.baseUrl}/signup`, this.signupForm.value).
-    subscribe(response => {
-      console.log(`New user ${response} created`);
-      
-    })
+    return this.http.post(`${this.baseUrl}/signup`, this.signupForm.value)
   }
 
   login(){
-    this.http.post(`${this.baseUrl}/login`, this.loginForm.value).
-    subscribe(response=>{
-      console.log(`User session with id logged in`);
-    })
+    return this.http.post(`${this.baseUrl}/login`, this.loginForm.value)
   }
 
   addNote(){
@@ -84,7 +81,7 @@ export class NotesService {
      this.http.get(`${this.baseUrl}/note`).
      subscribe(response => {
        console.log(response);
-       
+
      })
    }
 }

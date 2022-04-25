@@ -1,6 +1,7 @@
 <br>
 <br>
-<div class="login-form">
+<div class="background">
+  <div class="login-form">
     <div class="title">
         <div class="brand">
             <h1>PiNote</h1>
@@ -24,17 +25,20 @@
         <mat-form-field>
             <input
             matInput
-            type="password"
+            [type]="hide ? 'password' : 'text'"
             formControlName="password">
-            <mat-error *ngIf="notesService.loginForm.get('password')?.hasError('minLength') && 
+            <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            <mat-error *ngIf="notesService.loginForm.get('password')?.hasError('minLength') &&
             notesService.loginForm.get('password')?.dirty">Password must contain at least 7 characters</mat-error>
             <mat-error *ngIf="notesService.loginForm.get('password')?.dirty || notesService.loginForm.get('password')?.touched">This field cannot be empty</mat-error>
         </mat-form-field>
         <br>
-        <button mat-raised-button color="primary" type="button" (click)="notesService.login()"
+        <button mat-raised-button color="primary" type="button" (click)="login()"
         [disabled]="!notesService.loginForm.valid">Login</button>
         <br>
         <button id="instead" mat-button routerLink="/signup">Signup Instead?</button>
-        <mat-error **ngIf="notesService.loginForm?.invalid">Some or all the fields on this form are not correctly filled</mat-error>
+        <mat-error class="final-mat-error" *ngIf="notesService.loginForm?.invalid && notesService.loginForm?.touched">Some or all the fields on this form are not correctly filled</mat-error>
     </form>
+</div>
+
 </div>

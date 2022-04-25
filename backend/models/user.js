@@ -29,7 +29,6 @@ const userSchema = new Schema({
 })
 
 const noteSchema = new Schema({
-    _id: Schema.Types.ObjectId,
     title: {
         type: String,
         required: [true, 'Every note requires a title']

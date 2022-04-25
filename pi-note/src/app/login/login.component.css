@@ -1,7 +1,18 @@
+
+.background{
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  background-image: url('/pi-note/src/assets/images/login-signup-background.jpg');
+  background-position: 50% 50%;
+}
+
+.background > img{
+  width: 250px;
+}
 .login-form{
     width: 40vw;
     height: 80vh;
-    background-color: white;
     box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.4);
     border-radius: 5px;
     border-width: none;
