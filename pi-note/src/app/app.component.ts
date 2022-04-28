@@ -7,4 +7,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'pi-note';
+  userVal: string = 'Test Name'
+  nameChange(event: string){
+    this.userVal = event;
+  }
 }

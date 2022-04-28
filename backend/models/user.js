@@ -21,11 +21,7 @@ const userSchema = new Schema({
         type: String,
         required: [true, 'Password is required'],
         minlength: [8, 'Password cannot be shorter than 8 characters']
-    },
-    notes: [{
-        type: Schema.Types.ObjectId, 
-        ref: 'Notes'
-    }]
+    }
 })
 
 const noteSchema = new Schema({
@@ -35,7 +31,8 @@ const noteSchema = new Schema({
     },
     content: {
         type: String,
-    }
+    },
+    user: {type: Schema.Types.ObjectId, ref: 'Users'}
 })
 
 const User = mongoose.model('Users', userSchema)

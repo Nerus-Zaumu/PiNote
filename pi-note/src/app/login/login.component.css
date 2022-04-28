@@ -3,13 +3,8 @@
   width: 100%;
   height: 100%;
   justify-content: center;
-  background-image: url('/pi-note/src/assets/images/login-signup-background.jpg');
-  background-position: 50% 50%;
 }
 
-.background > img{
-  width: 250px;
-}
 .login-form{
     width: 40vw;
     height: 80vh;

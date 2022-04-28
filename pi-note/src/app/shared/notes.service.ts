@@ -1,4 +1,4 @@
-import { HttpClient, HttpResponse } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -56,32 +56,21 @@ export class NotesService {
 
 
   signup(){
-    return this.http.post(`${this.baseUrl}/signup`, this.signupForm.value)
+    return this.http.post(`${this.baseUrl}/signup`,  this.signupForm.value)
   }
 
   login(){
-    return this.http.post(`${this.baseUrl}/login`, this.loginForm.value)
+    return this.http.post(`${this.baseUrl}/login`, this.loginForm.value);
   }
 
   addNote(){
-    this.http.post(`${this.baseUrl}/note`, this.postForm.value).
-     subscribe((response) => {
-       console.log(response)
-       this.router.navigate(['/dashboard/home'])
-     })
+    return this.http.post(`${this.baseUrl}/note`,  this.postForm.value)
    }
 
    deleteNote(){
-     this.http.delete(`${this.baseUrl}/note`).
-     subscribe(response => {
-       console.log(response);
-     })
+     return this.http.delete(`${this.baseUrl}/note`)
    }
    getAllNotes(){
-     this.http.get(`${this.baseUrl}/note`).
-     subscribe(response => {
-       console.log(response);
-
-     })
+     return this.http.get(`${this.baseUrl}/note`)
    }
 }

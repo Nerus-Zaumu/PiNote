@@ -1,9 +1,10 @@
-import { catchError } from 'rxjs/operators';
+import { HttpResponse } from '@angular/common/http';
+import { catchError, finalize } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { NotesService } from './../shared/notes.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-login',
@@ -13,6 +14,9 @@ import { Component, OnInit } from '@angular/core';
 export class LoginComponent implements OnInit {
 
   hide: boolean = true;
+  toastrTime: number = 5000;
+  statusCode: number | undefined;
+  statusText: string | undefined;
 
   constructor(public notesService: NotesService,
     private router: Router,
@@ -24,25 +28,31 @@ export class LoginComponent implements OnInit {
   login(){
       this.notesService.login().
       pipe(
+        finalize(() =>{}),
         catchError(err => {
-          this.showFailure();
-          return throwError(err);
+          this.showFailure(err.message);
+          return throwError(() => err);
         })
       ).
       subscribe((response)=>{
-        console.log(response)
-      this.router.navigate(['/dashboard'])
-      this.showSuccess();
+        // this.statusCode = response.status;
+        // this.statusText = response.statusText;
+        console.log(response);
+        this.showSuccess();
+        this.router.navigate(['/dashboard']);
+        this.notesService.loginForm.reset()
     })
 
   }
   showSuccess() {
-    this.toastrService.success('Successfully logged into your PiNote account!', 'Major Success');
+    this.toastrService.success('Successfully logged into your PiNote account!', 'Major Success', {
+      timeOut: this.toastrTime
+    });
   }
 
-  showFailure(){
-    this.toastrService.error('Wrong Login Credentials. Make sure you enter the correct email and password', 'Major Error', {
-      timeOut: 3000
+  showFailure(message: string){
+    this.toastrService.error(`${message}!\n`, 'Major Error', {
+      timeOut: this.toastrTime
     })
   }
   }

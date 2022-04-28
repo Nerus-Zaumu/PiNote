@@ -12,6 +12,10 @@ import { throwError } from 'rxjs';
 })
 export class SignupComponent implements OnInit, OnDestroy {
   hide: boolean = true;
+  toastrTime: number = 5000
+  statusCode: number | undefined;
+  statusText: string | undefined;
+
   constructor(
     public notesService: NotesService,
     private router: Router,
@@ -19,26 +23,32 @@ export class SignupComponent implements OnInit, OnDestroy {
 
 
   signup(){
-      this.notesService.signup().
+     this.notesService.signup().
       pipe(
         catchError(err => {
-          this.showFailure()
-          return throwError(err)
+          this.showFailure(err.message)
+          return throwError(() => err)
         })
         ).
       subscribe((response) => {
+        console.log(response);
+        // this.statusCode = response.status;
+        // this.statusText = response.statusText;
+      this.showSuccess();
       this.router.navigate(['/login'])
-      this.showSuccess()
+      this.notesService.signupForm.reset();
     })
   }
 
   showSuccess() {
-    this.toastrService.success('Successfully Signed up for PiNote!', 'Major Success');
+    this.toastrService.success('Successfully Signed up for PiNote!', 'Major Success', {
+      timeOut: this.toastrTime
+    });
   }
 
-  showFailure(){
-    this.toastrService.error('Failed to successfully sign up. One or more fields may be wrong', 'Major Error', {
-      timeOut: 3000
+  showFailure(message: string){
+    this.toastrService.error(`${message}!\n`, 'Major Error', {
+      timeOut: this.toastrTime
     })
   }
 

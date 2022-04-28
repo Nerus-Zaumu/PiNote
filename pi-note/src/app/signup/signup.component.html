@@ -43,7 +43,7 @@
         <button mat-raised-button color="primary" type="button" (click)="signup()"
         [disabled]="!notesService.signupForm.valid">Signup</button>
         <br>
-        <button id="instead" mat-button routerLink="/login">Login Instead?</button>
+        <button id="instead" mat-button type="button" routerLink="/login">Login Instead?</button>
         <mat-error class="final-mat-error" *ngIf="notesService.signupForm?.invalid && notesService.signupForm?.touched">Some or all the fields on this form are not correctly filled</mat-error>
     </form>
 </div>

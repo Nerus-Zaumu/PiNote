@@ -36,7 +36,7 @@
         <button mat-raised-button color="primary" type="button" (click)="login()"
         [disabled]="!notesService.loginForm.valid">Login</button>
         <br>
-        <button id="instead" mat-button routerLink="/signup">Signup Instead?</button>
+        <button id="instead" mat-button type="button" routerLink="/signup">Signup Instead?</button>
         <mat-error class="final-mat-error" *ngIf="notesService.loginForm?.invalid && notesService.loginForm?.touched">Some or all the fields on this form are not correctly filled</mat-error>
     </form>
 </div>
