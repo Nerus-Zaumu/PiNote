@@ -12,7 +12,7 @@
     width: 65vw;
     /* border: 2px solid blueviolet; */
     box-shadow: 4px 4px 4px 4px rgba(31, 3, 37, 0.3);
-    
+
 }
 .mat-row{
     margin-top: 5px;
@@ -31,12 +31,23 @@
 }
 .mat-cell,
 .mat-header-cell{
-    margin: auto;
+    /* margin: auto; */
     color: white;
     font-size: larger;
 }
 .mat-paginator{
     margin: auto;
     width: 65vw;
+}
+
+#serial-num,
+#note-title{
+  text-align: start;
+  font-weight: bold;
+}
+#note-content{
+  text-align: center;
+  scroll-behavior: auto;
+  margin-left: 2px;
 }
 
