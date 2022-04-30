@@ -1,5 +1,6 @@
 require('express-async-errors')
 const  bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 
 const {User, Note} = require('../models/user');
 const { options } = require('../routes/user');
@@ -31,8 +32,15 @@ const login = async (req, res) => {
     if(!isMatch){
      return res.status(200).send('Wrong password');
     }
+    const token = jwt.sign(
+      {user_id: registeredUser._id},
+      process.env.TOKEN_KEY,
+      {expiresIn: "24h",}
+    )
+    registeredUser.token = token;
      res.json({msg: 'Successful Login', payload: registeredUser})
 }
+
 
 const logout = async (req, res) => {
     res.redirect('/login')
@@ -56,13 +64,8 @@ const deleteNote = async (req, res) => {
 
 const getAllNotes = async (req, res) => {
     const userNotes = await Note.find({user: refId});
-    console.log(refId);
     res.status(201).json({msg: 'All notes pulled', payload: userNotes})
 }
-
-// const updateNote = async (req, res) => {
-    
-// }
 
 
 module.exports = {
@@ -72,5 +75,4 @@ module.exports = {
     addNote,
     deleteNote,
     getAllNotes,
-    // updateNote
 }

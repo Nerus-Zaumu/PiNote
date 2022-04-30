@@ -30,6 +30,8 @@ export class NotesService {
     {serialNum: 14, title: 'First content', content: 'This is the content of the first table element. Let us try it out'}
   ]
 
+  userInfo: any = [];
+
 
   signupForm: FormGroup = new FormGroup(
     {

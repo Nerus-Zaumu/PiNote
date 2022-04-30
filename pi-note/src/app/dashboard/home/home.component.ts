@@ -19,14 +19,22 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
   constructor(private noteService: NotesService) { }
 
-  testData = this.noteService.testData
+  testData = this.noteService.userInfo;
+  // useAbleData: {id: string, title: string, content: string}[] = []
+  useAbleData: any = [];
 
   ngOnInit(): void {
-    this.dataSource = new MatTableDataSource(this.testData)
+    let actualPayload = this.testData[1];
+    let counter: number = 0;
+    for(const key in actualPayload){
+      if(actualPayload.hasOwnProperty(key)){
+        this.useAbleData.push({...actualPayload[key as keyof typeof actualPayload], id: counter})
+      }
+      counter++;
+    }
+    this.dataSource = new MatTableDataSource(this.useAbleData)
   }
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator
   }
-
-
 }
